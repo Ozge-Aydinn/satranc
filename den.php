@@ -77,6 +77,7 @@
                 }
             }
         }
+
     /*
            
             1. satır 0 dan siyahla  başlıyorsa 2. satırın beyazla başlaması lazım.  i ve k yı toplayıp modunu aldığımızda şartlar sağlanıyor
@@ -106,54 +107,73 @@
         }
     }
         
+        
 
    echo "<table class='size' border=5 > "  ;
 
-   //8*8 tablo oluştur
+   //8*8 tablo oluşturma
    for($i=0; $i<$row ; $i++)
    {
        echo "<tr> ";
        
         
         for ($k=0; $k < $col ; $k++) { 
-            
+    
 
              echo "<th class='";
-             /*
-             Satranç at hareketinde aritmetik bir düzen var.
-
-             Örneğin;
-             Atımız alan 37de ise 
-
-             at          arit. oran          boyanacak alan
-             37             -10                  = 27
-             37             -17                  = 20
-             37             -15                  = 22
-             37             -6                   = 31
-             37             +10                  = 47
-             37             +17                  = 54
-             37             +15                  = 52
-             37             +6                   = 43
-             
-             boyacanak alanlar atımızın olduğu alanın 6,10,15,17 toplanmış ve çıkarılmış hali
-             */
 
 
             
-            /*
-            kutu adedi kadar dönmüş bir sayacımız var 
-            eğer sayac randAt'ımızın -17sine -15ine..... eşit olduğunda arkaplanını kırmızı yapıyoruz.
-             
-            */
-            if($randAt-17==$sayac || $randAt-15==$sayac || $randAt-10==$sayac|| $randAt-6==$sayac|| $randAt+6==$sayac || $randAt+10==$sayac || $randAt+15==$sayac || $randAt+17==$sayac)
+            if ($atY==0) 
             {
+                
+                if($randAt+6==$sayac || $randAt-10==$sayac || $randAt+15==$sayac || $randAt-17==$sayac)
+                {
+                    sabitTahta($i,$k);
+                
+                }
+                else if ($randAt-6==$sayac || $randAt+10==$sayac || $randAt-15==$sayac || $randAt+17==$sayac)
+                {
+                     echo "red'";
+                }
+                else {
+                    sabitTahta($i,$k);
+                }
 
+                
+            }
+
+
+            else if ($atY==1) 
+            {
+                if($randAt+6==$sayac || $randAt-10==$sayac )
+                {
+                    sabitTahta($i,$k);
+                
+                }
+                else if ($randAt-6==$sayac || $randAt+10==$sayac || $randAt-15==$sayac || $randAt+17==$sayac|| $randAt+15==$sayac || $randAt-17==$sayac)
+                {
+                     echo "red'";
+                }
+                else {
+                    sabitTahta($i,$k);
+                }
+
+                
+            }
+
+
+
+
+            else if($randAt-17==$sayac || $randAt-15==$sayac || $randAt-10==$sayac|| $randAt-6==$sayac|| $randAt+6==$sayac || $randAt+10==$sayac || $randAt+15==$sayac || $randAt+17==$sayac)
+            {
+       
                     echo "red'";
                 
             }
             
 
-            else
+
             sabitTahta($i,$k);
             
             echo ">";
