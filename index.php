@@ -15,15 +15,11 @@
             /* sayfanın ortasında olsun*/
             margin-left: auto;
             margin-right: auto;
-            /* 
-            border-collapse: collapse;   :hücre aralarında tek çizgi olsun
-            border-spacing:0;       :hücre aralarında ki boşluk 0 olsun*/
-   
          
         }
 
         .black{
-            background: blue;
+            background: black;
         }
         .white{
             background: white;
@@ -61,6 +57,7 @@
     //atın bulunduğu x ve y konumu
     $atX;
     $atY;
+    $sag =1;  // 
     //atımızın hangi konumda olduğunu öğrenmek için iki boyutlu dizi oluşturup içerisini satranç tahtası kadar dolduruyoruz . Ardından random üretilen sayıya eşit olduğu anda x ve y değerlerini değişkene atıyoruz.
     $dizi = array();
     $diziSayac=0;
@@ -98,11 +95,11 @@
     {
         if (($i+$k)%2==0) 
         {
-            echo "black'";
+            echo "white'";
         }
         else 
         {
-            echo "white'";
+            echo "black'";
         }
     }
         
@@ -145,6 +142,63 @@
             eğer sayac randAt'ımızın -17sine -15ine..... eşit olduğunda arkaplanını kırmızı yapıyoruz.
              
             */
+
+
+            /*
+            At tahtanın sol ve sağ iki köşesindeyken dışarıda kalan alanların boyanmaması gerekiyor. 
+            Bunun için $atY= 0,1,6 ve 7 olduğunda dışarıda kalan alanları if döngüsünden çıkaracağız.
+
+            */
+            // 0 ve 7 de aynı işlemler olacak tek farklı (+'lar - ), (-'ler +) olacak
+             if ($atY==0 || $atY==7) 
+            {   
+                
+                if($atY==7)
+                {$sag=-1;}
+                else $sag=1;
+                
+                if($randAt+(6*$sag)==$sayac || $randAt-(10*$sag)==$sayac || $randAt+(15*$sag)==$sayac || $randAt-(17*$sag)==$sayac)
+                {
+                    sabitTahta($i,$k);
+                
+                }
+                else if ($randAt-(6*$sag)==$sayac || $randAt+(10*$sag)==$sayac || $randAt-(15*$sag)==$sayac || $randAt+(17*$sag)==$sayac)
+                {
+                     echo "red'";
+                }
+                else {
+                    sabitTahta($i,$k);
+                }
+
+                
+            }
+
+            else if ($atY==1 || $atY==6) 
+            {
+                if($atY==6)
+                {$sag=-1;}
+                else $sag=1;
+
+                if($randAt+(6*$sag)==$sayac || $randAt-(10*$sag)==$sayac )
+                {
+                    sabitTahta($i,$k);
+                
+                }
+                else if ($randAt-(6*$sag)==$sayac || $randAt+(10*$sag)==$sayac || $randAt-15==$sayac || $randAt+17==$sayac|| $randAt+15==$sayac || $randAt-17==$sayac)
+                {
+                     echo "red'";
+                }
+                else {
+                    sabitTahta($i,$k);
+                }
+
+                
+            }
+
+
+
+
+
             if($randAt-17==$sayac || $randAt-15==$sayac || $randAt-10==$sayac|| $randAt-6==$sayac|| $randAt+6==$sayac || $randAt+10==$sayac || $randAt+15==$sayac || $randAt+17==$sayac)
             {
 
@@ -164,7 +218,7 @@
             }
 
                
-            echo $sayac;
+            //echo $sayac;
 
             echo "</th>";
             $sayac++;
